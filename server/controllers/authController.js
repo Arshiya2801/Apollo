@@ -6,8 +6,8 @@ import crypto from 'crypto';
 
 // Setup nodemailer transporter
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
+  host: process.env.MAIL_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.MAIL_PORT || '587'),
   secure: false, // true for 465, false for other ports
   family: 4, // Force IPv4 routing (Render free tier does not support IPv6)
   auth: {
