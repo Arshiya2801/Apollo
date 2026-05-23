@@ -1,0 +1,252 @@
+.code-visualizer-premium {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--ws-bg, #ffffff);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.visualizer-canvas-wrapper {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* Glassmorphism Panel overlaying the canvas */
+.visualizer-glass-panel {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .visualizer-glass-panel {
+  background: rgba(22, 27, 34, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.v-glass-header {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .v-glass-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.v-step-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9B40E0;
+  background: rgba(155, 64, 224, 0.1);
+  padding: 4px 10px;
+  border-radius: 12px;
+  align-self: flex-start;
+}
+
+.v-explanation {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ws-text, #24292f);
+  line-height: 1.4;
+}
+
+.dark-mode .v-explanation {
+  color: #e6edf3;
+}
+
+.v-glass-controls {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 16px;
+}
+
+.glass-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid transparent;
+  color: #57606a;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dark-mode .glass-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: #8b949e;
+}
+
+.glass-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08);
+  color: #24292f;
+  transform: scale(1.05);
+}
+
+.dark-mode .glass-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #c9d1d9;
+}
+
+.glass-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.play-btn {
+  background: linear-gradient(135deg, #9B40E0, #b162f2);
+  color: white;
+  box-shadow: 0 4px 12px rgba(155, 64, 224, 0.3);
+  padding: 10px;
+}
+
+.dark-mode .play-btn {
+  background: linear-gradient(135deg, #a371f7, #9B40E0);
+  color: white;
+}
+
+.play-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(155, 64, 224, 0.4);
+  color: white;
+}
+
+/* Premium Slider */
+.v-slider-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.premium-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.dark-mode .premium-slider {
+  background: rgba(255,255,255,0.1);
+}
+
+.premium-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #9B40E0;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.premium-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Loading State */
+.visualizer-loading-glass {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  color: #57606a;
+  z-index: 20;
+}
+
+.dark-mode .visualizer-loading-glass {
+  background: rgba(22, 27, 34, 0.8);
+  color: #8b949e;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* React flow styling and Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.react-flow__node {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 8px;
+  border: 1px solid #d0d7de;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.dark-mode .react-flow__node {
+  background: #1e1e1e;
+  color: #e6edf3;
+  border-color: #30363d;
+}
+
+/* HIGHLIGHTED NODE STYLES */
+.react-flow__node.highlighted {
+  border-color: #9B40E0;
+  border-width: 2px;
+  background: linear-gradient(180deg, #ffffff, #fdfaff);
+  box-shadow: 0 0 0 4px rgba(155, 64, 224, 0.15), 0 4px 12px rgba(155, 64, 224, 0.3);
+  transform: scale(1.08) translateY(-2px);
+  z-index: 1000;
+}
+
+.dark-mode .react-flow__node.highlighted {
+  border-color: #a371f7;
+  background: linear-gradient(180deg, #1e1e1e, #2d213f);
+  box-shadow: 0 0 0 4px rgba(163, 113, 247, 0.2), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Animated Edges Enhancement */
+.react-flow__edge.animated path {
+  stroke: #9B40E0;
+  stroke-width: 2.5;
+  stroke-dasharray: 5;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+  from { stroke-dashoffset: 10; }
+  to { stroke-dashoffset: 0; }
+}
+
+.dark-mode .react-flow__edge.animated path {
+  stroke: #a371f7;
+}
