@@ -16,6 +16,67 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Sends email via Brevo HTTP API (Port 443) with a fallback to Nodemailer SMTP
+const sendEmail = async (toEmail, subject, textContent) => {
+  const isBrevoAPI = process.env.EMAIL_PASS && (process.env.EMAIL_PASS.startsWith('xsmtpsib-') || process.env.EMAIL_PASS.startsWith('xkeysib-'));
+  
+  if (isBrevoAPI) {
+    try {
+      const senderEmail = process.env.SENDER_EMAIL || (process.env.EMAIL_USER.includes('@smtp-brevo.com') 
+        ? '23308@iiitu.ac.in' // Fallback to registered sender email
+        : process.env.EMAIL_USER);
+
+      console.log(`Sending email via Brevo HTTP API to ${toEmail} from ${senderEmail}...`);
+      
+      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'api-key': process.env.EMAIL_PASS,
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: { name: "Apollo", email: senderEmail },
+          to: [{ email: toEmail }],
+          subject: subject,
+          textContent: textContent
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log('✅ Brevo HTTP Email sent successfully:', data);
+        return true;
+      } else {
+        console.error('❌ Brevo HTTP API Error response:', data);
+      }
+    } catch (apiError) {
+      console.error('❌ Failed to send via Brevo HTTP API:', apiError.message);
+    }
+  }
+
+  // Fallback to Nodemailer SMTP
+  console.log(`Falling back to Nodemailer SMTP for ${toEmail}...`);
+  return new Promise((resolve) => {
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: toEmail,
+      subject: subject,
+      text: textContent
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('❌ SMTP Error sending email:', error);
+        resolve(false);
+      } else {
+        console.log('✅ SMTP Email sent:', info.response);
+        resolve(true);
+      }
+    });
+  });
+};
+
 const generateOTP = () => {
   return crypto.randomInt(100000, 999999).toString();
 };
@@ -46,20 +107,7 @@ export const signup = async (req, res) => {
     await user.save();
 
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-      const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Apollo - Verification OTP',
-        text: `Your verification OTP is: ${otp}. It expires in 10 minutes.`
-      };
-      
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error sending email:', error);
-        } else {
-          console.log('OTP Email sent:', info.response);
-        }
-      });
+      sendEmail(email, 'Apollo - Verification OTP', `Your verification OTP is: ${otp}. It expires in 10 minutes.`);
     } else {
       console.log(`⚠️ Email credentials missing. OTP for ${email} is ${otp}`);
     }
@@ -129,13 +177,7 @@ export const login = async (req, res) => {
       await user.save();
 
       if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-        const mailOptions = {
-          from: process.env.EMAIL_USER,
-          to: email,
-          subject: 'Apollo - New Verification OTP',
-          text: `Your new verification OTP is: ${otp}. It expires in 10 minutes.`
-        };
-        transporter.sendMail(mailOptions, () => {});
+        sendEmail(email, 'Apollo - New Verification OTP', `Your new verification OTP is: ${otp}. It expires in 10 minutes.`);
       } else {
         console.log(`⚠️ Email credentials missing. New OTP for ${email} is ${otp}`);
       }
