@@ -4,11 +4,11 @@ import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
-// Setup nodemailer transporter
+const mailPort = parseInt(process.env.MAIL_PORT || '587');
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.MAIL_PORT || '587'),
-  secure: false, // true for 465, false for other ports
+  port: mailPort,
+  secure: mailPort === 465, // true for 465, false for other ports
   family: 4, // Force IPv4 routing (Render free tier does not support IPv6)
   auth: {
     user: process.env.EMAIL_USER,
