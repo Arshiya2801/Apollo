@@ -210,10 +210,10 @@ function Interview() {
         <div 
           className="iv-mode-card" 
           style={{ padding: '24px', border: '1px solid #333', borderRadius: '12px', transition: 'border-color 0.2s', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
-          onMouseOver={(e) => e.currentTarget.style.borderColor = '#22c55e'}
+          onMouseOver={(e) => e.currentTarget.style.borderColor = '#9B40E0'}
           onMouseOut={(e) => e.currentTarget.style.borderColor = '#333'}
         >
-          <LucideIcons.Users size={48} color="#22c55e" style={{ marginBottom: '16px' }} />
+          <LucideIcons.Users size={48} color="#9B40E0" style={{ marginBottom: '16px' }} />
           <h3>Formal Interview Mode</h3>
           <p style={{ color: '#aaa', fontSize: '14px', marginTop: '8px', marginBottom: '20px' }}>Host a 1-on-1 collaborative session. Includes real-time video calling and synchronized code editing.</p>
 
@@ -222,7 +222,7 @@ function Interview() {
               const roomId = Math.random().toString(36).substring(2, 10);
               navigate(`/interview/join/${roomId}?host=true`);
             }}
-            style={{ width: '100%', padding: '10px', background: '#22c55e', color: '#000', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', marginBottom: '12px' }}
+            style={{ width: '100%', padding: '10px', background: '#9B40E0', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', marginBottom: '12px' }}
           >
             Create New Room
           </button>

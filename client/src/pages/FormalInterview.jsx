@@ -209,17 +209,17 @@ function FormalInterview() {
       {/* HEADER */}
       <header style={{ height: '60px', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', padding: '0 24px', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <LucideIcons.Briefcase color="#9B40E0" />
-          <h2 style={{ fontSize: '18px', margin: 0 }}>Formal Interview ({role})</h2>
+          <LucideIcons.Sparkles color="#9B40E0" size={20} />
+          <h2 style={{ fontSize: '20px', margin: 0, fontFamily: 'var(--ws-font-display, "Playfair Display", serif)', fontStyle: 'italic', fontWeight: 400 }}>Formal Interview ({role})</h2>
         </div>
         
         <div style={{ display: 'flex', gap: '12px' }}>
           {isHost && (
-            <button onClick={handleCopyLink} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#2d2d3a', border: 'none', color: '#fff', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>
+            <button onClick={handleCopyLink} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#2d2d3a', border: 'none', color: '#fff', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontFamily: 'var(--ws-font-body)', fontSize: '13px' }}>
               <LucideIcons.Copy size={14} /> Copy Invite
             </button>
           )}
-          <button onClick={handleLeave} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#f85149', border: 'none', color: '#fff', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>
+          <button onClick={handleLeave} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#f85149', border: 'none', color: '#fff', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontFamily: 'var(--ws-font-body)', fontSize: '13px' }}>
             <LucideIcons.LogOut size={14} /> Leave
           </button>
         </div>
