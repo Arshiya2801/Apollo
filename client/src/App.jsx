@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LandingV2 from './pages/LandingV2';
@@ -9,12 +9,14 @@ import Features from './pages/Features';
 import Roast from './pages/Roast';
 import Review from './pages/Review';
 import Interview from './pages/Interview';
+import FormalInterview from './pages/FormalInterview';
 import Focus from './pages/Focus';
 import Profile from './pages/Profile';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
-  if (!user) return <Navigate to="/auth" />;
+  const location = useLocation();
+  if (!user) return <Navigate to="/auth" state={{ from: location }} replace />;
   return children;
 };
 
@@ -33,6 +35,7 @@ function AppRoutes() {
         <Route path="/roast" element={<ProtectedRoute><Roast /></ProtectedRoute>} />
         <Route path="/code-review" element={<ProtectedRoute><Review /></ProtectedRoute>} />
         <Route path="/interview" element={<ProtectedRoute><Interview /></ProtectedRoute>} />
+        <Route path="/interview/join/:roomId" element={<ProtectedRoute><FormalInterview /></ProtectedRoute>} />
         <Route path="/focus" element={<ProtectedRoute><Focus /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       </Routes>

@@ -108,6 +108,7 @@ export const signup = async (req, res) => {
 
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
       sendEmail(email, 'Apollo - Verification OTP', `Your verification OTP is: ${otp}. It expires in 10 minutes.`);
+      console.log(`[DEBUG] OTP for ${email} is: ${otp}`);
     } else {
       console.log(`⚠️ Email credentials missing. OTP for ${email} is ${otp}`);
     }
@@ -178,6 +179,7 @@ export const login = async (req, res) => {
 
       if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
         sendEmail(email, 'Apollo - New Verification OTP', `Your new verification OTP is: ${otp}. It expires in 10 minutes.`);
+        console.log(`[DEBUG] New OTP for ${email} is: ${otp}`);
       } else {
         console.log(`⚠️ Email credentials missing. New OTP for ${email} is ${otp}`);
       }

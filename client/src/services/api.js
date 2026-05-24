@@ -1,5 +1,5 @@
 // Use VITE_API_BASE if provided, otherwise fallback based on environment
-const API_BASE = import.meta.env.VITE_API_BASE || (import.meta.env.MODE === 'production' 
+export const API_BASE = import.meta.env.VITE_API_BASE || (import.meta.env.MODE === 'production' 
   ? 'https://practium6.onrender.com' 
   : 'http://localhost:5000');
 

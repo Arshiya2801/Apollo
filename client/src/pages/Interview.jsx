@@ -9,6 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import './Interview.css';
 
 const PHASES = {
+  LOBBY: 'lobby',
   SETUP: 'setup',
   CODING: 'coding',
   FOLLOWUP: 'followup',
@@ -23,7 +24,8 @@ const LANGUAGES = [
 ];
 
 function Interview() {
-  const [phase, setPhase] = useState(PHASES.SETUP);
+  const [phase, setPhase] = useState(PHASES.LOBBY);
+  const [joinRoomId, setJoinRoomId] = useState('');
   const [difficulty, setDifficulty] = useState('Medium');
   const [timeLeft, setTimeLeft] = useState(45 * 60);
   const [problem, setProblem] = useState('');
@@ -181,6 +183,75 @@ function Interview() {
   };
 
   // ═══════════════ RENDERS ═══════════════
+
+  const renderLobby = () => (
+    <div className="iv-setup-card" style={{ maxWidth: '800px' }}>
+      <div className="iv-setup-header">
+        <div className="iv-setup-icon">
+          <LucideIcons.Briefcase size={36} color="#9B40E0" />
+        </div>
+        <h2>Interview Center</h2>
+        <p className="iv-setup-sub">Choose your interview experience</p>
+      </div>
+
+      <div className="iv-setup-body" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div 
+          className="iv-mode-card" 
+          onClick={() => setPhase(PHASES.SETUP)}
+          style={{ padding: '24px', border: '1px solid #333', borderRadius: '12px', cursor: 'pointer', transition: 'border-color 0.2s', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
+          onMouseOver={(e) => e.currentTarget.style.borderColor = '#9B40E0'}
+          onMouseOut={(e) => e.currentTarget.style.borderColor = '#333'}
+        >
+          <LucideIcons.Bot size={48} color="#9B40E0" style={{ marginBottom: '16px' }} />
+          <h3>Self-Practice Mode</h3>
+          <p style={{ color: '#aaa', fontSize: '14px', marginTop: '8px' }}>Practice with our AI-driven technical interviewer. Features dynamic problem generation and behavioral follow-ups.</p>
+        </div>
+
+        <div 
+          className="iv-mode-card" 
+          style={{ padding: '24px', border: '1px solid #333', borderRadius: '12px', transition: 'border-color 0.2s', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
+          onMouseOver={(e) => e.currentTarget.style.borderColor = '#22c55e'}
+          onMouseOut={(e) => e.currentTarget.style.borderColor = '#333'}
+        >
+          <LucideIcons.Users size={48} color="#22c55e" style={{ marginBottom: '16px' }} />
+          <h3>Formal Interview Mode</h3>
+          <p style={{ color: '#aaa', fontSize: '14px', marginTop: '8px', marginBottom: '20px' }}>Host a 1-on-1 collaborative session. Includes real-time video calling and synchronized code editing.</p>
+
+          <button 
+            onClick={() => {
+              const roomId = Math.random().toString(36).substring(2, 10);
+              navigate(`/interview/join/${roomId}?host=true`);
+            }}
+            style={{ width: '100%', padding: '10px', background: '#22c55e', color: '#000', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', marginBottom: '12px' }}
+          >
+            Create New Room
+          </button>
+          
+          <div style={{ display: 'flex', width: '100%', gap: '8px' }}>
+            <input 
+              type="text" 
+              placeholder="Paste Room ID or Link..." 
+              value={joinRoomId}
+              onChange={(e) => setJoinRoomId(e.target.value)}
+              style={{ flex: 1, padding: '8px 12px', background: '#1e1e24', border: '1px solid #444', borderRadius: '6px', color: '#fff', fontSize: '14px' }}
+            />
+            <button 
+              onClick={() => {
+                if (joinRoomId.trim()) {
+                  const id = joinRoomId.split('/').pop().split('?')[0];
+                  navigate(`/interview/join/${id}`);
+                }
+              }}
+              disabled={!joinRoomId.trim()}
+              style={{ padding: '8px 16px', background: joinRoomId.trim() ? '#333' : '#222', color: joinRoomId.trim() ? '#fff' : '#666', border: '1px solid #444', borderRadius: '6px', cursor: joinRoomId.trim() ? 'pointer' : 'not-allowed' }}
+            >
+              Join
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   const renderSetup = () => (
     <div className="iv-setup-card">
@@ -369,6 +440,7 @@ function Interview() {
       <ImmersiveNav
         title="Technical Interview"
         subtitle={
+          phase === PHASES.LOBBY ? 'Select Mode' :
           phase === PHASES.SETUP ? 'Configure your session' :
           phase === PHASES.CODING ? `Coding · ${difficulty}` :
           phase === PHASES.FOLLOWUP ? 'Behavioral Follow-up' :
@@ -396,6 +468,7 @@ function Interview() {
       />
 
       <main className="iv-content">
+        {phase === PHASES.LOBBY && renderLobby()}
         {phase === PHASES.SETUP && renderSetup()}
         {phase === PHASES.CODING && renderCoding()}
         {phase === PHASES.FOLLOWUP && renderFollowup()}

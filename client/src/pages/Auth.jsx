@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signupUser, verifyOtp, loginUser } from '../services/api';
 import toast from 'react-hot-toast';
@@ -19,6 +19,8 @@ const Auth = () => {
   
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname + (location.state?.from?.search || '') || '/workspace';
   const { login } = useAuth();
 
   const handleInputChange = (e) => {
@@ -34,13 +36,13 @@ const Auth = () => {
         const res = await verifyOtp({ email: formData.email, otp: formData.otp });
         login(res.user, res.token);
         toast.success(res.message);
-        navigate('/workspace');
+        navigate(from, { replace: true });
       } else if (isLogin) {
         try {
           const res = await loginUser({ email: formData.email, password: formData.password });
           login(res.user, res.token);
           toast.success('Logged in successfully');
-          navigate('/workspace');
+          navigate(from, { replace: true });
         } catch (err) {
           if (err.message.includes('not verified')) {
             toast.error(err.message);
