@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { useNavigate } from 'react-router-dom';
 import CodeEditor from '../components/CodeEditor/CodeEditor';
 import OutputPanel from '../components/OutputPanel/OutputPanel';
-import CodeVisualizer from '../components/Visualizer/CodeVisualizer';
+// import CodeVisualizer from '../components/Visualizer/CodeVisualizer';
 import { streamAIChat, fetchGeneratedTests, runCode } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { EDITOR_MODES } from '../modes/modeConfig';
@@ -397,7 +397,7 @@ function Workspace() {
         <div className="ws-resize-handle" onMouseDown={(e) => handleMouseDown('sidebar', e)} />
 
         <main className="ws-main">
-          {activeMode.key === 'visualizer' && messages.length > 0 ? (
+          {false /* activeMode.key === 'visualizer' && messages.length > 0 */ ? (
              <div style={{ flex: 1, width: '100%', height: '100%', overflow: 'hidden' }}>
                <CodeVisualizer 
                  content={messages[messages.length - 1]?.role === 'model' ? messages[messages.length - 1].content : ''} 

@@ -54,6 +54,7 @@ export const EDITOR_MODES = [
     color: '#f85149',
     description: 'Brutal but constructive code critique with humor.',
   },
+  /*
   {
     key: 'visualizer',
     label: 'Code Visualizer',
@@ -61,6 +62,7 @@ export const EDITOR_MODES = [
     color: '#a371f7',
     description: 'Draws and animates runtime structures like Linked Lists and Trees.',
   },
+*/
 ];
 
 // Type 2: Chat / Conversational Personas — back-and-forth AI coaching

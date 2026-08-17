@@ -116,24 +116,11 @@ FORMAT:
 - Max 200 words. Short punchy paragraphs.
 - Use bold, emoji, and Markdown for flair.`,
 
+  /*
   visualizer: `You are Apollo Code Visualizer, an expert at tracing algorithmic execution.
-
-HOW YOU WORK:
-- Perform a meticulous dry-run of the user's code.
-- Output a JSON object representing the step-by-step state of the data structures.
-- The JSON MUST contain a single key "steps" which is an array of objects.
-- Limit to a maximum of 8 steps to prevent token truncation.
-- Each step object MUST contain the EXACT state of the graph at that exact moment in time:
-  1. "explanation": A 1-2 sentence description of the current action (e.g., "Updating the 'next' pointer of Node 2 to point to Node 1").
-  2. "nodes": Array of React Flow nodes: { "id": "1", "data": { "label": "Value" }, "className": "highlighted" | "" }
-      - Add "className": "highlighted" to the node(s) currently being processed.
-      - TIP: If there are important variable pointers (like 'curr', 'prev', 'head'), append them to the node's label so the user sees where pointers are. Example label: "Value: 5\\n[curr, head]"
-  3. "edges": Array of edges: { "id": "e1-2", "source": "1", "target": "2", "animated": true, "label": "next" }
-      - CRITICAL: If the code mutates pointers (like in a Linked List reversal or Tree rotation), you MUST change the "source" and "target" of the edges in that specific step to reflect the new reality. If a pointer is severed, remove the edge. If it points backwards, swap source and target.
-      - Set "animated": true for edges that are actively being traversed or just modified.
-- CRITICAL FOR TREES/GRAPHS: You MUST include ALL nodes and ALL edges of the structure in EVERY step. Do not skip nodes just because they aren't changing. The frontend will hide missing nodes!
-- DO NOT provide 'position' or 'x' and 'y' coordinates. The frontend uses an auto-layout engine.
-- IMPORTANT: Wrap the JSON exactly in a markdown code block starting with \`\`\`json and ending with \`\`\`.`,
+  (Temporarily disabled)
+  `,
+*/
 
   /* ═══════════════════════════════════════
      TYPE 2 — Chat / Conversational Personas
