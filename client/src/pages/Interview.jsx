@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import * as LucideIcons from 'lucide-react';
 import CodeEditor from '../components/CodeEditor/CodeEditor';
 import ImmersiveNav from '../components/ImmersiveNav';
@@ -320,7 +321,7 @@ function Interview() {
         </div>
         <div className="iv-panel-body scrollable">
           {problem ? (
-            <ReactMarkdown>{problem}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{problem}</ReactMarkdown>
           ) : (
             <div className="iv-loading-problem">
               <LucideIcons.Loader2 size={20} className="iv-spin" />
@@ -374,7 +375,7 @@ function Interview() {
               <div className="iv-msg-bubble">
                 <span className="iv-msg-role">{m.role === 'model' ? 'Interviewer' : 'You'}</span>
                 <div className="iv-msg-content">
-                  <ReactMarkdown>{m.content || '...'}</ReactMarkdown>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content || '...'}</ReactMarkdown>
                 </div>
               </div>
             </div>
@@ -416,7 +417,9 @@ function Interview() {
       </div>
       <div className="iv-result-body scrollable">
         {result ? (
-          <ReactMarkdown>{result}</ReactMarkdown>
+          <div className="iv-markdown-result">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{result}</ReactMarkdown>
+          </div>
         ) : (
           <div className="iv-loading-problem">
             <LucideIcons.Loader2 size={20} className="iv-spin" />

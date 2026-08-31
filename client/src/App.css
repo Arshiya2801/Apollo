@@ -941,3 +941,134 @@ body {
 .light-mode .ws-chat-body blockquote {
   background: rgba(123, 47, 190, 0.03);
 }
+
+
+/* ══════════════════════════════════
+   DOCUMENT Q&A - MARKDOWN RESPONSE STYLING
+   ══════════════════════════════════ */
+.markdown-response {
+  color: #e0e0e0;
+  line-height: 1.7;
+}
+
+.markdown-response h1,
+.markdown-response h2,
+.markdown-response h3,
+.markdown-response h4 {
+  color: #fff;
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.markdown-response h1 { font-size: 1.4rem; border-bottom: 1px solid #2d2d3a; padding-bottom: 0.4rem; }
+.markdown-response h2 { font-size: 1.2rem; color: #7ee787; }
+.markdown-response h3 { font-size: 1rem; color: #9B40E0; }
+.markdown-response h4 { font-size: 0.95rem; }
+
+.markdown-response p {
+  margin-bottom: 0.8rem;
+}
+
+.markdown-response strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.markdown-response em {
+  color: #aaa;
+  font-style: italic;
+}
+
+.markdown-response ul,
+.markdown-response ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.markdown-response li {
+  margin-bottom: 0.4rem;
+}
+
+.markdown-response li::marker {
+  color: #7ee787;
+}
+
+.markdown-response code {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  background: rgba(126, 231, 135, 0.1);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  color: #7ee787;
+  font-size: 0.9em;
+}
+
+.markdown-response pre {
+  background: #1a1a22;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.8rem 0;
+  border: 1px solid #2d2d3a;
+}
+
+.markdown-response pre code {
+  background: none;
+  padding: 0;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.markdown-response blockquote {
+  border-left: 3px solid #7ee787;
+  margin: 0.8rem 0;
+  padding: 0.5rem 1rem;
+  background: rgba(126, 231, 135, 0.05);
+  border-radius: 0 6px 6px 0;
+  color: #aaa;
+}
+
+.markdown-response hr {
+  border: none;
+  border-top: 1px solid #2d2d3a;
+  margin: 1.2rem 0;
+}
+
+.markdown-response table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+}
+
+.markdown-response th,
+.markdown-response td {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #2d2d3a;
+  text-align: left;
+}
+
+.markdown-response th {
+  background: #1a1a22;
+  color: #7ee787;
+  font-weight: 600;
+}
+
+.markdown-response a {
+  color: #7ee787;
+  text-decoration: none;
+}
+
+.markdown-response a:hover {
+  text-decoration: underline;
+}
+
+/* Loader spin animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}

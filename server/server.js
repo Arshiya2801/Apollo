@@ -8,6 +8,7 @@ import { Server } from 'socket.io';
 import aiRoutes from './routes/aiRoutes.js';
 import codeRoutes from './routes/codeRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import ragRoutes from './routes/ragRoutes.js';
 import connectDB from './config/db.js';
 import initInterviewSockets from './sockets/interviewSockets.js';
 
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/code', codeRoutes);
+app.use('/api/rag', ragRoutes);
 
 // ── Health Check ──
 app.get('/health', (req, res) => {

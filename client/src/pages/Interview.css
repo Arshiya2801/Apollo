@@ -439,3 +439,162 @@
 
 .scrollable { overflow-y: auto; scrollbar-width: thin; }
 .muted { color: var(--ws-text-muted); font-style: italic; font-size: 0.78rem; }
+
+
+/* ══════════════════════════════════
+   MARKDOWN RESULT STYLING
+   ══════════════════════════════════ */
+.iv-markdown-result {
+  color: #e0e0e0;
+  line-height: 1.75;
+}
+
+.iv-markdown-result h1,
+.iv-markdown-result h2,
+.iv-markdown-result h3,
+.iv-markdown-result h4 {
+  color: #fff;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.iv-markdown-result h1 { 
+  font-size: 1.4rem; 
+  border-bottom: 1px solid #2d2d3a; 
+  padding-bottom: 0.5rem; 
+}
+
+.iv-markdown-result h2 { 
+  font-size: 1.15rem; 
+  color: #9B40E0;
+}
+
+.iv-markdown-result h3 { 
+  font-size: 1rem; 
+  color: #7ee787;
+}
+
+.iv-markdown-result p {
+  margin-bottom: 1rem;
+}
+
+.iv-markdown-result strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.iv-markdown-result em {
+  color: #aaa;
+  font-style: italic;
+}
+
+.iv-markdown-result ul,
+.iv-markdown-result ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.iv-markdown-result li {
+  margin-bottom: 0.5rem;
+}
+
+.iv-markdown-result li::marker {
+  color: #9B40E0;
+}
+
+/* Tables */
+.iv-markdown-result table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.85rem;
+}
+
+.iv-markdown-result thead {
+  background: #1e1e28;
+}
+
+.iv-markdown-result th {
+  padding: 0.75rem 1rem;
+  border: 1px solid #3d3d4a;
+  text-align: left;
+  font-weight: 600;
+  color: #9B40E0;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.iv-markdown-result td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #2d2d3a;
+  color: #ccc;
+  vertical-align: top;
+}
+
+.iv-markdown-result tbody tr:nth-child(even) {
+  background: rgba(155, 64, 224, 0.03);
+}
+
+.iv-markdown-result tbody tr:hover {
+  background: rgba(155, 64, 224, 0.06);
+}
+
+/* Code */
+.iv-markdown-result code {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  background: rgba(155, 64, 224, 0.12);
+  padding: 0.2em 0.45em;
+  border-radius: 4px;
+  color: #c9a5f0;
+  font-size: 0.88em;
+}
+
+.iv-markdown-result pre {
+  background: #12121a;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid #2d2d3a;
+}
+
+.iv-markdown-result pre code {
+  background: none;
+  padding: 0;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+/* Blockquotes */
+.iv-markdown-result blockquote {
+  border-left: 4px solid #9B40E0;
+  margin: 1rem 0;
+  padding: 0.75rem 1.25rem;
+  background: rgba(155, 64, 224, 0.06);
+  border-radius: 0 8px 8px 0;
+  color: #bbb;
+}
+
+.iv-markdown-result blockquote p {
+  margin-bottom: 0;
+}
+
+/* Horizontal rule */
+.iv-markdown-result hr {
+  border: none;
+  border-top: 1px solid #2d2d3a;
+  margin: 1.5rem 0;
+}
+
+/* Links */
+.iv-markdown-result a {
+  color: #9B40E0;
+  text-decoration: none;
+}
+
+.iv-markdown-result a:hover {
+  text-decoration: underline;
+}

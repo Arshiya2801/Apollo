@@ -12,6 +12,7 @@ import Interview from './pages/Interview';
 import FormalInterview from './pages/FormalInterview';
 import Focus from './pages/Focus';
 import Profile from './pages/Profile';
+import DocumentQA from './pages/DocumentQA';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -38,6 +39,7 @@ function AppRoutes() {
         <Route path="/interview/join/:roomId" element={<ProtectedRoute><FormalInterview /></ProtectedRoute>} />
         <Route path="/focus" element={<ProtectedRoute><Focus /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/docs" element={<ProtectedRoute><DocumentQA /></ProtectedRoute>} />
       </Routes>
     </>
   );
